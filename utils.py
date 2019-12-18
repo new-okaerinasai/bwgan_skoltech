@@ -164,7 +164,7 @@ def get_activations(files, dims=2048, device='cpu'):
        query tensor.
     """
     model = InceptionV3([InceptionV3.BLOCK_INDEX_BY_DIM[dims]]).to(device)
-    model.eval()      
+    model.eval()
 
     n_batches = len(files) // 50
     n_used_imgs = n_batches * 50
@@ -352,3 +352,4 @@ def inception_score(imgs, device='cpu', batch_size=32, resize=False, splits=1):
         split_scores.append(np.exp(np.mean(scores)))
 
     return np.mean(split_scores), np.std(split_scores)
+

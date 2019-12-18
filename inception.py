@@ -27,8 +27,8 @@ for i, fname in enumerate(os.listdir(path)):
         images[i] = 2 * (scipy.misc.imread(os.path.join(path, fname)) / 255) - 1
         n += 1
 images = images[:n].transpose((0,3,1,2))
-
-data = torch.utils.data.Dataset(torch.tensor(images))
+print(images.shape)
+data = torch.tensor(images)
 mean, std = utils.inception_score(data, device=device, batch_size=32, resize=True, splits=10)
 print('Inception score: {0:.3f} +-{0:.3f}'.format(mean, std))
 with open(os.path.join(path, 'inception.txt'), 'w') as f:
