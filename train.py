@@ -85,7 +85,7 @@ def calc_gradient_penalty(D, real_data, fake_data, gamma, lamb):
                               create_graph=True, retain_graph=True, only_inputs=True)[0]
     gradients = gradients.view((BATCH_SIZE, CH, IMG_SIZE, IMG_SIZE))
     dual_sobolev_gradients = sobolev_transform(gradients, C, -S)
-    gradient_penalty = ((dual_sobolev_gradients.norm(2, dim=1) / gamma - 1) ** 2).mean() * lamb
+    gradient_penalty = ((dual_sobolev_gradients.norm(DUAL_EXPONENT, dim=1) / gamma - 1) ** 2).mean() * lamb
     return gradient_penalty
 
 def train():
